@@ -1,0 +1,21 @@
+/* items/items-page.component.css */
+.filters {
+  display: flex;
+  gap: 0.75rem;
+  margin-block: 0.5rem 1rem;
+}
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table th,
+.table td {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem;
+}
+.table tr {
+  cursor: pointer;
+}
+.table tr:hover {
+  background: #fafafa;
+}

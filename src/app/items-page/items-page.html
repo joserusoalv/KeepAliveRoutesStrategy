@@ -1,0 +1,49 @@
+<!-- items/items-page.component.html -->
+<section class="filters" data-testid="filters">
+  <input
+    type="search"
+    placeholder="Buscar…"
+    [value]="q()"
+    (input)="q.set(($event.target).value)"
+    data-testid="filter-q"
+  />
+
+  <select
+    [value]="user()"
+    (change)="user.set(($any($event.target).value === 'all' ? 'all' : +$any($event.target).value))"
+    data-testid="filter-user"
+  >
+    <option value="all">Todos</option>
+    <option *ngFor="let u of [1,2,3,4,5,6,7,8,9,10]" [value]="u">
+      user {{u}}
+    </option>
+  </select>
+</section>
+
+<section class="table" *ngIf="!loading(); else loadingTmpl">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Título</th>
+        <th>Usuario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let it of filtered()"
+        [routerLink]="['/items', it.id]"
+        data-testid="row"
+      >
+        <td>{{it.id}}</td>
+        <td>{{it.title}}</td>
+        <td>{{it.userId}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <p *ngIf="filtered().length === 0" data-testid="empty">Sin resultados</p>
+</section>
+
+<ng-template #loadingTmpl>
+  <p>Cargando…</p>
+</ng-template>
