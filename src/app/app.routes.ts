@@ -1,10 +1,18 @@
 // app.routes.ts
 import { Routes } from '@angular/router';
-import { ItemDetail } from './item-detail/item-detail';
-import { ItemsPage } from './items-page/items-page';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'items' },
-  { path: 'items', component: ItemsPage, title: 'Items' },
-  { path: 'items/:id', component: ItemDetail, title: 'Item detail' },
+  {
+    path: 'items',
+    loadComponent: () =>
+      import('./items-page/items-page').then((c) => c.ItemsPage),
+    title: 'Items',
+  },
+  {
+    path: 'items/:id',
+    loadComponent: () =>
+      import('./item-detail/item-detail').then((c) => c.ItemDetail),
+    title: 'Item detail',
+  },
 ];

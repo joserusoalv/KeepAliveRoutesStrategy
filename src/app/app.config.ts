@@ -3,7 +3,12 @@ import {
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection,
 } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  PreloadAllModules,
+  provideRouter,
+  withComponentInputBinding,
+  withPreloading,
+} from '@angular/router';
 
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
@@ -14,7 +19,11 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     provideZonelessChangeDetection(),
     provideHttpClient(),
-    provideRouter(routes, withComponentInputBinding()),
+    provideRouter(
+      routes,
+      withComponentInputBinding(),
+      withPreloading(PreloadAllModules)
+    ),
     provideRouteReuse({ cachePaths: ['items'] }), // <— activamos reuse SOLO en /items
   ],
 };
